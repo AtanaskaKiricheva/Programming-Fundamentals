@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp7
+{
+    class Program
+    {
+        static void Main(string[] args)
+
+        {
+            var pesho = int.Parse(Console.ReadLine());
+            var gosho = int.Parse(Console.ReadLine());
+
+            var p = 100;
+            var g = 100;
+
+            var count = 0;
+            for (int i = 1; i < 90; i++)
+            {
+                count++;
+                if (i % 2 == 0)
+                {
+                    p -= gosho;
+                    if (p <= 0|| g<=0)
+                    {
+                        Console.WriteLine("Gosho won in {0}th round.", count);
+                        return;
+                    }
+                    Console.WriteLine("Gosho used Thunderous fist and reduced Pesho to {0} health.", p);
+                }
+                else
+                {
+                    g -= pesho;
+                    if (g <= 0 || p<=0)
+                    {
+                        Console.WriteLine("Pesho won in {0}th round.", count);
+                        return;
+                    }
+                    Console.WriteLine("Pesho used Roundhouse kick and reduced Gosho to {0} health.", g);
+                }
+                if (i%3==0)
+                {
+                    p += 10;
+                    g += 10;
+                }
+
+            }
+
+
+
+        }
+    }
+}

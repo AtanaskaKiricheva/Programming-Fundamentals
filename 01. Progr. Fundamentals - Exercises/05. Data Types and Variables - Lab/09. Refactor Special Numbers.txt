@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp8
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int number = int.Parse(Console.ReadLine());
+            int sumOfNumbers = 0;
+            int n = 0;
+            bool result = false;
+
+            for (int i = 1; i <= number; i++)
+            {
+                n = i;
+                while (i > 0)
+                {
+                    sumOfNumbers += i % 10;
+                    i = i / 10;
+                }
+                result = (sumOfNumbers == 5) || (sumOfNumbers == 7) || (sumOfNumbers == 11);
+                Console.WriteLine($"{n} -> {result}");
+                sumOfNumbers = 0;
+                i = n;
+            }
+
+
+        }
+    }
+}

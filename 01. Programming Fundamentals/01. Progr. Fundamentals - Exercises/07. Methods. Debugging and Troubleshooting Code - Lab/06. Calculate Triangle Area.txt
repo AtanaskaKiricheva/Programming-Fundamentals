@@ -1,0 +1,20 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double Width = double.Parse(Console.ReadLine());
+            double Height = double.Parse(Console.ReadLine());
+            double Trianglearea = area(Width, Height);
+            Console.WriteLine(Trianglearea);
+        }
+
+        static double area (double width, double height)
+        {
+            return width * height / 2;
+        }
+    }
+}

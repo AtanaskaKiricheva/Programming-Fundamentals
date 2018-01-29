@@ -1,0 +1,47 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var number = int.Parse(Console.ReadLine());
+            number = Math.Abs(number);
+            Console.WriteLine(Multiple(number));
+        }
+
+        static int Multiple (int n)
+        {
+            return SumOfEven(n)*SumOfOdd(n);
+        }
+        static int SumOfEven (int even)
+        {
+            int sum = 0;
+            while (even > 0)
+            {
+                int lastDigit = even % 10;
+                if (lastDigit % 2 == 0)
+                {
+                    sum += lastDigit;
+                }
+                even /= 10;
+            }
+            return sum;
+        }
+        static int SumOfOdd (int odd)
+        {
+            int sum = 0;
+            while (odd >0 )
+            {
+                int lastDigit = odd % 10;
+                if (lastDigit%2!=0)
+                {
+                    sum += lastDigit;
+                }
+                odd /= 10;
+            }
+            return sum;
+        }
+    }
+}

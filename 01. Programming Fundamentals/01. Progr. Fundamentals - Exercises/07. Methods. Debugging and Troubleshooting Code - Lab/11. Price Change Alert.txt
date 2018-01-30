@@ -1,0 +1,49 @@
+using System;
+
+class PriceChangeAlert
+{
+    static void Main()
+    {
+        int n = int.Parse(Console.ReadLine());
+        double border = double.Parse(Console.ReadLine());
+        double last = double.Parse(Console.ReadLine());
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            double next = double.Parse(Console.ReadLine());
+
+            double difference = Pronext(last, next);
+            bool isSignificantDifference = isThereADifference(difference,border);
+            string message = Get(last, next, difference, isSignificantDifference);
+            Console.WriteLine(message);
+            last = next;
+        }
+    }
+
+    static string Get(double last, double next, double difference, bool etherTrueOrFalse)
+    {
+        string to = "";
+        if (difference == 0)
+            to = string.Format("NO CHANGE: {0}", next);
+        else if (!etherTrueOrFalse)
+            to = string.Format($"MINOR CHANGE: {last} to {next} ({difference*100:F2}%)");
+        else if (etherTrueOrFalse && (difference > 0))
+            to = string.Format($"PRICE UP: {last} to {next} ({difference*100:F2}%)");
+        else if (etherTrueOrFalse && (difference < 0))
+            to = string.Format($"PRICE DOWN: {last} to {next} ({difference*100:F2}%)");
+        return to;
+    }
+    static bool isThereADifference(double diff, double border)
+    {
+        if (Math.Abs(diff) >= border)
+            return true;
+        else
+            return false;
+    }
+
+    static double Pronext(double last, double next)
+    {
+        double r = (next - last)/last;
+        return r;
+    }
+}

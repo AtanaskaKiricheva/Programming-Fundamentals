@@ -1,0 +1,14 @@
+using System;
+
+class Exercises
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello, {0}!", Name());
+
+    }
+    static string Name()
+    {
+        return (Console.ReadLine());
+    }
+}

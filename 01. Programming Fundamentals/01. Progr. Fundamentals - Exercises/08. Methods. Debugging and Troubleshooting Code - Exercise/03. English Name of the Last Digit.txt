@@ -4,17 +4,17 @@ class Exercises
 {
     static void Main()
     {
-        int number = int.Parse(Console.ReadLine());
+        long number = long.Parse(Console.ReadLine());
 
 
         Console.WriteLine(EnglishName(number));
     }
 
-    static string EnglishName(int n)
+    static string EnglishName(long n)
     {
         n = Math.Abs(n);
 
-        int lastNumber = n % 10;
+        long lastNumber = n % 10;
 
         string name = string.Empty;
         switch (lastNumber)

@@ -10,11 +10,11 @@ class Exercises
         Console.WriteLine(EnglishName(number));
     }
 
-    static string EnglishName (int n)
+    static string EnglishName(int n)
     {
         n = Math.Abs(n);
 
-        int lastNumber =  n % 10;
+        int lastNumber = n % 10;
 
         string name = string.Empty;
         switch (lastNumber)
@@ -28,7 +28,8 @@ class Exercises
             case 7: name = "seven"; break;
             case 8: name = "eight"; break;
             case 9: name = "nine"; break;
-        }
+            case 0: name = "zero"; break;
+        } 
 
 
         return name;

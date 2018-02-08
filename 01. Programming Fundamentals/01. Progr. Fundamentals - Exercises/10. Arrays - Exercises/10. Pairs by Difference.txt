@@ -1,0 +1,26 @@
+using System;
+using System.Linq;
+
+
+public class arraysExercise
+{
+    public static void Main()
+    {
+        int[] sequence = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+        int difference = int.Parse(Console.ReadLine());
+
+        var count = 0;
+        for (int i = 0; i < sequence.Length; i++)
+        {
+            for (int j = i+1; j < sequence.Length; j++)
+            {
+                if (Math.Abs(sequence[i]-sequence[j])==difference)
+                {
+                    count++;
+                }
+            }
+        }
+
+        Console.WriteLine(count);
+    }
+}

@@ -1,0 +1,15 @@
+using System;
+
+public class arraysLab
+{
+    public static void Main()
+    {
+        string alphabet = "abcdefghijklmnopqrstuvwxyz";
+        string input = Console.ReadLine();
+
+        foreach (char ch in input)
+        {
+            Console.WriteLine($"{ch} -> {alphabet.IndexOf(ch)}");
+        }
+    }
+}

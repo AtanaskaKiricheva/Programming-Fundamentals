@@ -1,0 +1,48 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+public class ListsLab
+{
+    public static void Main()
+    {
+        List<string> words = Console.ReadLine()
+            .Split(new char[]
+            { ',', ';', ':', '.' ,'!','(', ')', '"' ,'\'' , '\\' ,'/' ,'[', ']', ' ' }, StringSplitOptions.RemoveEmptyEntries)
+           .ToList();
+
+        List<string> lowerCase = new List<string> { };
+        List<string> UpperCase = new List<string> { };
+        List<string> MixedCase = new List<string> { };
+
+        var lower = 0;
+        var upper = 0;
+        var mixed = 0;
+
+        foreach (var item in words)
+        {
+            foreach (var symbol in item)
+            {
+                if (symbol >= 'a')
+                    lower++;
+                else if (symbol >= 'A')
+                    upper++;
+                else
+                    mixed++;
+            }
+            if (lower >= 1 && upper == 0 && mixed ==0)
+                lowerCase.Add(item);
+            else if (upper >= 1 && lower == 0 && mixed  == 0)
+                UpperCase.Add(item);
+            else
+                MixedCase.Add(item);
+
+            lower = 0;
+            upper = 0;
+            mixed = 0;
+        }
+        Console.WriteLine("Lower-case: {0}", string.Join(", ", lowerCase));
+        Console.WriteLine("Mixed-case: {0}", string.Join(", ", MixedCase));
+        Console.WriteLine("Upper-case: {0}", string.Join(", ", UpperCase));
+    }
+}

@@ -1,0 +1,36 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+public class ListsLab
+{
+    public static void Main()
+    {
+        List<string> numbers = Console.ReadLine()
+            .Split(new char[] { '|' },StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+        numbers.Reverse();
+
+        foreach (var item in numbers)
+        {
+            var result = item.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var joined = string.Join(" ", result);
+            Console.Write(joined+ " ");
+        }
+        Console.WriteLine();
+
+
+        //-------- alternative solution -----------
+        //List<string> numbers = Console.ReadLine()
+        //    .Split('|')
+        //    .Reverse()
+        //    .Select(s => s.Split(new char[] {' '},StringSplitOptions.RemoveEmptyEntries).ToList())
+        //    .ToList();
+        // 
+        //   foreach (var innerList in numbers)
+        //   {
+        //    Console.Write(string.Join(" ",innerList)+ " ");
+        //   }
+    }
+
+}

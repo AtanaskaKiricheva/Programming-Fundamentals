@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ConsoleApp7
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> integers = Console.ReadLine().Split(new []{" "}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+            var count = 0;
+            int number = 0;
+            var finalCount = 0;
+            int [] finalNumber = integers.ToArray();
+
+            for (int i = 0; i < integers.Count; i++)
+            {
+                for (int j = i+1; j < integers.Count; j++)
+                {
+                    if (integers[i]==integers[j])
+                    {
+                        count++;
+                        number = integers[i];
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    if (count>finalCount)
+                    {
+                        finalCount = count;
+                        finalNumber[0] = number;
+                    }
+                }
+                count = 0;
+                number = 0;
+            }
+            int[] answer = new int[finalCount+1];
+            for (int i = 0; i < answer.Length; i++)
+            {
+                answer[i] = finalNumber[0];
+            }
+            Console.WriteLine(string.Join(" ",answer));
+        }
+    }
+}

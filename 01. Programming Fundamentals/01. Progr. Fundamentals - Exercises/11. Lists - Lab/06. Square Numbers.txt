@@ -1,0 +1,28 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+public class ListsLab
+{
+    public static void Main()
+    {
+        List<int> words = Console.ReadLine()
+            .Split().Select(int.Parse)
+           .ToList();
+
+        List<int> square = new List<int> { };
+
+
+        foreach (var item in words)
+        {
+            if (Math.Sqrt(item) == (int)Math.Sqrt(item))
+            {
+                square.Add(item);
+            }
+        }
+        square.Sort((a, b) => b.CompareTo(a));
+
+        Console.WriteLine(string.Join(" ",square));
+
+    }
+}

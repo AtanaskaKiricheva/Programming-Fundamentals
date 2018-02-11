@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ConsoleApp7
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> integers = Console.ReadLine().Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+
+            string[] line = Console.ReadLine().Split().ToArray();
+
+            while (line[0] != "Odd" && line[0] != "Even")
+            {
+                switch (line[0])
+                {
+                    case "Delete": integers.RemoveAll(num => num == int.Parse(line[1])); break;
+                    case "Insert": integers.Insert(int.Parse(line[2]), int.Parse(line[1])); break;
+                }
+                line = Console.ReadLine().Split().ToArray();
+            }
+            if (line[0] == "Even")
+            {
+
+                for (int i = 0; i < integers.Count; i++)
+                {
+                    if (integers[i] % 2 == 0)
+                    {
+                        Console.Write(string.Join(" ", integers[i] + " "));
+                    }
+                }
+            }
+            if (line[0] == "Odd")
+            {
+                for (int i = 0; i < integers.Count; i++)
+                {
+                    if (integers[i] % 2 == 1)
+                    {
+                        Console.Write(string.Join(" ", integers[i] + " "));
+                    }
+                }
+            }
+            Console.WriteLine();
+        }
+    }
+}

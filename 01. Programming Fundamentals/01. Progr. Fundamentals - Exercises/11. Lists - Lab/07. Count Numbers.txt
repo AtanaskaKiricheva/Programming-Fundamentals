@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+ 
+namespace _7.CountNumbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            var numbers = new SortedDictionary<int,int>();
+ 
+            foreach(var number in input)
+            {
+                if (numbers.ContainsKey(number))
+                {
+                    numbers[number]++;
+                }
+                else
+                {
+                    numbers[number] = 1;
+                }
+            }
+ 
+            foreach(var num in numbers)
+            {
+                Console.WriteLine("{0} -> {1}", num.Key, num.Value);
+            }
+        }
+    }
+}

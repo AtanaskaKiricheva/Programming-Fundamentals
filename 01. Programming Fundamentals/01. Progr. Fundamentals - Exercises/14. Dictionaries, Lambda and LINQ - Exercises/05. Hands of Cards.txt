@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ConsoleApp10
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            var players = new Dictionary<string, List<string>>();
+            string[] hand = Console.ReadLine().Split
+                (new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+            var name = "";
+            var sum = 0;
+
+            while (hand[0] != "JOKER")
+            {
+                List<string> cards = hand[1].Split
+                    (new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                name = hand[0];
+                cards = cards.Distinct().ToList(); // no equal cards
+
+                if (!players.ContainsKey(hand[0]))
+                    players.Add(name, cards);
+                else
+                {
+                    players[name].AddRange(cards);
+                    players[name] = players[name].Distinct().ToList();
+                }
+                hand = Console.ReadLine().Split
+                 (new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+            }
+            foreach (var player in players)
+            {
+                var value = 0;
+                var multiplier = 0;
+                char findTen = 'a';
+
+                foreach (var card in player.Value)
+                {
+                    foreach (var item in card)
+                    {
+                        if (item == 'J')
+                            value += 11;
+                        else if (item == 'Q')
+                            value += 12;
+                        else if (item == 'K')
+                            value += 13;
+                        else if (item == 'A')
+                            value += 14;
+                        else if (item < 60) //numbers 2 to 9
+                            value += item - 48;
+                        else if (item == 'S')
+                            multiplier += 4;
+                        else if (item == 'H')
+                            multiplier += 3;
+                        else if (item == 'D')
+                            multiplier += 2;
+                        else if (item == 'C')
+                            multiplier += 1;
+                        if (findTen == '1' && item == '0') //number 10
+                            value += 9;
+
+                        findTen = item;
+                    }
+                    sum += value * multiplier;
+                    value = 0;
+                    multiplier = 0;
+                }
+                Console.WriteLine($"{player.Key}: {sum}");
+                sum = 0;
+            }
+        }
+    }
+}

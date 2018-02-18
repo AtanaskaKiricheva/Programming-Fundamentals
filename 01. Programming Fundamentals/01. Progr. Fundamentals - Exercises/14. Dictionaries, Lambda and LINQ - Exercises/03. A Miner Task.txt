@@ -1,0 +1,42 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+public class ListsLab
+{
+    public static void Main()
+    {
+
+
+        var words = new Dictionary<string, int>();
+
+        while (true)
+        {
+            string resource = Console.ReadLine();
+
+            if (resource == "stop")
+            {
+                foreach (var item in words)
+                {
+                    Console.WriteLine(item.Key + " -> " + item.Value);
+                }
+                break;
+            }
+
+            int quantity = int.Parse(Console.ReadLine());
+
+            if (words.ContainsKey(resource))
+            {
+                words[resource] += quantity;
+            }
+            else
+            {
+                words.Add(resource, quantity);
+            }
+
+        }
+
+
+
+    }
+}

@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
+public class January06_2017Part1
+{
+    public static void Main()
+    {
+        List<string> participants = Console.ReadLine().Split(", ").ToList();
+        List<string> songs = Console.ReadLine().Split(", ").ToList();
+        string[] performance = Console.ReadLine()
+            .Split(", ").ToArray();
+
+        var winners = new Dictionary<string, List<string>>();
+
+        while (performance[0] != "dawn")
+        {
+            foreach (var participant in participants)
+            {
+                if (!winners.ContainsKey(participant))
+                {
+                    winners.Add(participant,new List<string>());
+                }
+                if (performance[0] == participant)
+                {
+                    foreach (var song in songs)
+                    {
+                        foreach (var playerSong in performance)
+                        {
+                            if (playerSong == participant)
+                            {
+                                continue;
+                            }
+                            if (playerSong != song)
+                            {
+                                winners[participant].Add(playerSong);
+                            }
+                        }
+                    }
+                }
+            }
+            performance = Console.ReadLine().Split(", ").ToArray();
+        }
+        if (winners.Count == 0)
+        {
+            Console.WriteLine("No awards");
+
+            return;
+        }
+
+        foreach (KeyValuePair<string, List<string>> pair in winners
+         .OrderByDescending(a => a.Value.Distinct().ToList().Count).ThenBy(n => n.Key))
+        {
+            List<string> awards = pair.Value.Distinct().ToList();
+
+            Console.WriteLine($"{pair.Key}: {awards.Count} awards");
+            foreach (string award in awards.OrderBy(n => n))
+            {
+                Console.WriteLine($"--{award}");
+            }
+        }
+    }
+}

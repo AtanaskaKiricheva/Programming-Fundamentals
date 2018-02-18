@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp10
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var collected = new Dictionary<string, string>();
+            var name = Console.ReadLine();
+
+            while (name != "stop")
+            {
+                var email = Console.ReadLine();
+
+                if (!email.EndsWith("us") || email.EndsWith("uk"))
+                {
+                    collected.Add(name, email);
+                }
+                name = Console.ReadLine();
+            }
+            foreach (var pair in collected)
+            {
+            Console.WriteLine(pair.Key+" -> "+pair.Value);
+            }
+
+        }
+    }
+}

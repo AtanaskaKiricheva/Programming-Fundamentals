@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
+public class January06_2017Part1
+{
+    public static void Main()
+    {
+        DateTime timeSinoLeaves = DateTime.Parse(Console.ReadLine());
+        int numberOfSteps = int.Parse(Console.ReadLine())%86400;      // %86400 are the seconds in 1 day (in case days are given too)
+        int timeInSecondsPerStep = int.Parse(Console.ReadLine())%86400;
+
+        int timeArrival = numberOfSteps * timeInSecondsPerStep;
+        var toprint = timeSinoLeaves.AddSeconds(timeArrival);
+
+
+
+        Console.WriteLine($"Time Arrival: {toprint:HH:mm:ss}");
+
+    }
+}

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 public class January06_2017Part1
@@ -13,6 +12,7 @@ public class January06_2017Part1
             .Split(", ").ToArray();
 
         var winners = new Dictionary<string, List<string>>();
+        var previousSong = "";
 
         while (performance[0] != "dawn")
         {
@@ -20,7 +20,7 @@ public class January06_2017Part1
             {
                 if (!winners.ContainsKey(participant))
                 {
-                    winners.Add(participant,new List<string>());
+                    winners.Add(participant, new List<string>());
                 }
                 if (performance[0] == participant)
                 {
@@ -32,32 +32,47 @@ public class January06_2017Part1
                             {
                                 continue;
                             }
-                            if (playerSong != song)
+                            if (!songs.Contains(playerSong))
                             {
-                                winners[participant].Add(playerSong);
+                                if (playerSong != song && songs.Contains(previousSong))
+                                {
+                                    winners[participant].Add(playerSong);
+                                    previousSong = "";
+                                }
+
                             }
+                            previousSong = playerSong;
+
                         }
                     }
                 }
             }
             performance = Console.ReadLine().Split(", ").ToArray();
         }
+        var badKeys = winners.Where(pair => pair.Value.Count == 0)
+                        .Select(pair => pair.Key)
+                        .ToList();
+        foreach (var badKey in badKeys)
+        {
+            winners.Remove(badKey);
+        }
+
         if (winners.Count == 0)
         {
             Console.WriteLine("No awards");
-
-            return;
         }
-
-        foreach (KeyValuePair<string, List<string>> pair in winners
-         .OrderByDescending(a => a.Value.Distinct().ToList().Count).ThenBy(n => n.Key))
+        else
         {
-            List<string> awards = pair.Value.Distinct().ToList();
-
-            Console.WriteLine($"{pair.Key}: {awards.Count} awards");
-            foreach (string award in awards.OrderBy(n => n))
+            foreach (KeyValuePair<string, List<string>> pair in winners
+             .OrderByDescending(a => a.Value.Distinct().ToList().Count).ThenBy(n => n.Key))
             {
-                Console.WriteLine($"--{award}");
+                List<string> awards = pair.Value.Distinct().ToList();
+
+                Console.WriteLine($"{pair.Key}: {awards.Count} awards");
+                foreach (string award in awards.OrderBy(n => n))
+                {
+                    Console.WriteLine($"--{award}");
+                }
             }
         }
     }

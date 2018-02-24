@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string[] input = Console.ReadLine().Split();
+        string pattern = @"([A-Z]{2})(\d{1,2}\.\d{1,2})([a-zA-Z]+)\|";
+        string pattern2 = @"([A-Z]{2})(\d{1,2}\.\d{1,2})([a-zA-Z]+)";
+
+        var toPrint = new Dictionary<string, KeyValuePair<string, string>>();
+        var temperatureAndWeather = new KeyValuePair<string, string> { };
+
+        while (input[0] != "end")
+        {
+            if (Regex.IsMatch(input[0], pattern))
+            {
+                input = input[0].Split('|');
+                foreach (var sentence in input)
+                {
+                    if (Regex.IsMatch(sentence, pattern2))
+                    {
+                        Match match = Regex.Match(sentence, pattern2);
+                        var city = match.Groups[1].Value;
+                        var temp = match.Groups[2].Value;
+                        var weath = match.Groups[3].Value;
+
+                        temperatureAndWeather = new KeyValuePair<string, string>(temp, weath);
+                        if (!toPrint.ContainsKey(city))
+                        {
+                            toPrint.Add(city, temperatureAndWeather);
+                        }
+                        else
+                            toPrint[match.Groups[1].Value] = temperatureAndWeather;
+                    }
+                }
+            }
+            input = Console.ReadLine().Split();
+        }
+
+        foreach (var temperature in toPrint.OrderBy(x => double.Parse(x.Value.Key)))
+        {
+
+                Console.WriteLine($"{temperature.Key} => {double.Parse(temperature.Value.Key):f2} => {temperature.Value.Value}");
+            
+        }
+
+    }
+}

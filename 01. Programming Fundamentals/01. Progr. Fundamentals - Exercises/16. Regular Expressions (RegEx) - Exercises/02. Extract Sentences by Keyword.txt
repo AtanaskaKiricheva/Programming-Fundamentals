@@ -1,0 +1,21 @@
+using System;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string keyWord = Console.ReadLine();
+        string pattern = $@"\b{keyWord}\b";
+        string[] text = Console.ReadLine().Split(new char[] { '.', '?', '!' });
+
+
+        foreach (var item in text)
+        {
+            foreach (Match sentence in Regex.Matches(item, pattern))
+            {
+                Console.WriteLine(item.Trim());
+            }
+        }
+    }
+}

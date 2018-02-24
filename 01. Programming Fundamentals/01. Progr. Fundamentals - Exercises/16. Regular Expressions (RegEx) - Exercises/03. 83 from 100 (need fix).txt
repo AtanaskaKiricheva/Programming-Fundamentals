@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        int[] elements = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        string[] text = Console.ReadLine().Split('|').Where(ch => ch.Length > 0).ToArray();
+
+        int firstElement = elements[0];
+        int secondElement = elements[1];
+
+        List<string> toPrint = new List<string> { };
+
+        
+        foreach (var item in text)
+        {
+            var sentence = "";
+            string forList = "";
+            if (item[0] == '<')
+            {
+                int second = 0;
+                sentence = item;
+                if (secondElement > sentence.Skip(1 + firstElement).Take(sentence.Length - 1).Count())
+                {
+                    second = sentence.Skip(1 + firstElement).Take(sentence.Length - 1).Count();
+                }
+                else
+                {
+                    second = secondElement;
+                }
+                forList = sentence.Substring(firstElement + 1, second);
+                if (forList.Length>0)
+                {
+                toPrint.Add(forList);
+                }
+                second = 0;
+            }
+        }
+        Console.WriteLine(string.Join(", ", toPrint));
+
+    }
+}

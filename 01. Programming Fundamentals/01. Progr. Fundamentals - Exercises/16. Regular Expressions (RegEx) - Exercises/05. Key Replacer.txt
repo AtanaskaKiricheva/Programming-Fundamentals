@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string[] keys = Console.ReadLine().Split('|', '<', '\\').ToArray();
+        string text = Console.ReadLine();
+
+        string start = keys.First();
+        string end = keys.Last();
+
+        string pattern = $@"{start}(.*?){end}";
+        bool isEmpty = true;
+
+        foreach (Match m in Regex.Matches(text, pattern))
+        {
+            if (m.Groups[1].Length > 0)
+            {
+                Console.Write(m.Groups[1].Value);
+                isEmpty = false;
+            }
+        }
+        if (isEmpty)
+        {
+            Console.WriteLine("Empty result");
+        }
+
+        Console.WriteLine();
+    }
+}

@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class February26_2017
+{
+    public static void Main()
+    {
+        string input = Console.ReadLine();
+
+        var privateMessage = @"/([0-9]+)([ <\-> ]+)([a-zA-Z0-9]+)/"; //g1-digit;g2-<->;g3-letter/digit 
+        var broadcast = @"([\D]+|([^ <\-> ]))( <\-> )+([a-zA-Z0-9]+)\n"; //g1-non-digit;g3-<->;g4-letter/digit
+
+
+
+
+    }
+}

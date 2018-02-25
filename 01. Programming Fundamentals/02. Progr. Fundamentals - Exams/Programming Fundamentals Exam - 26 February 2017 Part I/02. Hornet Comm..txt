@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string input = Console.ReadLine();
+        string patternForMessage = @"^(\d+) <-> ([0-9a-zA-Z]+)$";
+        string patternForBroadcast = @"^(.+[^\d]) <-> ([0-9a-zA-Z]+)$";
+
+        var privateMessage = new List<KeyValuePair<string, string>> { };
+        var broadcast = new List<KeyValuePair<string, string>> { };
+
+        while (input != "Hornet is Green")
+        {
+            var match1 = Regex.Match(input, patternForMessage);
+            var match2 = Regex.Match(input, patternForBroadcast);
+
+            if (Regex.IsMatch(input, patternForMessage))
+            {
+                var code = match1.Groups[1].Value;
+                var message = match1.Groups[2].Value;
+
+                privateMessage.Add(new KeyValuePair<string, string>(string.Join("", code.Reverse()), message));
+            }
+            else if (Regex.IsMatch(input, patternForBroadcast))
+            {
+                var message = match2.Groups[1].Value;
+                var frequency = match2.Groups[2].Value;
+                var reversed = "";
+                foreach (var letter in frequency)
+                {
+                    if (letter >= 65 && letter <= 90)
+                    {
+                        reversed += letter.ToString().ToLower();
+                    }
+                    else if (letter >= 97 && letter <= 122)
+                    {
+                        reversed += letter.ToString().ToUpper();
+                    }
+                    else
+                    {
+                        reversed += letter.ToString();
+                    }
+                }
+
+                broadcast.Add(new KeyValuePair<string, string>(reversed, message));
+            }
+            input = Console.ReadLine();
+        }
+
+        Console.WriteLine("Broadcasts:");
+        if (broadcast.Count != 0)
+        {
+            foreach (var line in broadcast)
+            {
+                Console.WriteLine($"{line.Key} -> {line.Value}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("None");
+        }
+        Console.WriteLine("Messages:");
+        if (privateMessage.Count != 0)
+        {
+            foreach (var line in privateMessage)
+            {
+                Console.WriteLine($"{line.Key} -> {line.Value}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("None");
+        }
+
+    }
+}

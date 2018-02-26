@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string[] input = Console.ReadLine().Split(" ").ToArray();
+
+        var namePriceQuantity = new Dictionary<string, KeyValuePair<double, double>>();
+        var priceAndQuantity = new KeyValuePair<double, double>();
+
+        while (input[0] != "stocked")
+        {
+            string name = input[0];
+            double price = double.Parse(input[1]);
+            double quantity = double.Parse(input[2]);
+
+            priceAndQuantity = new KeyValuePair<double, double>(price, quantity);
+            if (!namePriceQuantity.ContainsKey(name))
+            {
+                namePriceQuantity.Add(name, priceAndQuantity);
+
+            }
+            else
+            {
+                namePriceQuantity[name] = 
+                    new KeyValuePair<double, double>(price, namePriceQuantity[name].Value+quantity);
+            }
+            input = Console.ReadLine().Split(" ");
+
+        }
+        var grandTotal = 0.0;
+        foreach (var item in namePriceQuantity)
+        {
+            Console.WriteLine($"{item.Key}: ${item.Value.Key:f2} * {item.Value.Value} = ${item.Value.Key*item.Value.Value:f2}");
+            grandTotal += item.Value.Key * item.Value.Value;
+        }
+        Console.WriteLine("------------------------------");
+        Console.WriteLine($"Grand Total: ${grandTotal:f2}");
+
+
+    }
+}

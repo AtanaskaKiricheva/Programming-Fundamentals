@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        List<int> odds = Console.ReadLine().Split(" ").Select(int.Parse).ToList();
+
+        var sum = 0;
+
+        for (int i = 0; i < odds.Count; i++)
+        {
+            if (odds[i] % 2 != 0)
+            {
+                odds.RemoveAt(i);
+                i--;
+            }
+
+        }
+        foreach (var item in odds)
+        {
+            sum += item;
+        }
+        var average = sum / odds.Count;
+
+        for (int i = 0; i < odds.Count; i++)
+        {
+            if (odds[i] <= average)
+            {
+                odds[i] = odds[i] - 1;
+            }
+            else
+            {
+                odds[i] = odds[i] + 1;
+            }
+
+        }
+
+        Console.WriteLine(string.Join(' ', odds));
+
+
+
+    }
+}

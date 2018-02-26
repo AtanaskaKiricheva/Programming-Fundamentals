@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        List<long> beehives = Console.ReadLine().Split(' ').Select(long.Parse).ToList();
+        List<long> hornets = Console.ReadLine().Split(' ').Select(long.Parse).ToList();
+
+        long summedUp = 0;
+        foreach (var power in hornets)
+        {
+            summedUp += power;
+        }
+
+        for (int i = 0; i < beehives.Count; i++)
+        {
+            if (summedUp == 0 || hornets.Count == 0)
+            {
+                break;
+            }
+            if (beehives[i] < summedUp)
+            {
+                beehives.RemoveAt(i);
+                i--;
+            }
+            else if (beehives[i] == summedUp)
+            {
+                beehives.RemoveAt(i);
+                summedUp -= hornets[0];
+                hornets.RemoveAt(0);
+                i--;
+            }
+            else if (beehives[i] > summedUp)
+            {
+                beehives[i] = beehives[i] - summedUp;
+                summedUp -= hornets[0];
+                hornets.RemoveAt(0);
+
+            }
+        }
+        if (beehives.Count > 0)
+        {
+            foreach (var bee in beehives)
+                Console.Write(bee + " ");
+        }
+        else
+        {
+            foreach (var hornet in hornets)
+                Console.Write(hornet + " ");
+        }
+        Console.WriteLine();
+
+    }
+}

@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        List<string> input = Console.ReadLine().Split(' ').ToList();
+        var sort = new Dictionary<char, int>();
+
+        foreach (var item in input)
+        {
+            foreach (var i in item)
+            {
+
+                if (!sort.ContainsKey(i))
+                {
+                    sort.Add(i, 1);
+                }
+                else
+                {
+                    sort[i] += 1;
+                }
+
+            }
+        }
+        foreach (var item in sort.OrderByDescending(x=>x.Value))
+        {
+        Console.WriteLine($"{item.Key} -> {item.Value}");
+
+        }
+
+
+    }
+}

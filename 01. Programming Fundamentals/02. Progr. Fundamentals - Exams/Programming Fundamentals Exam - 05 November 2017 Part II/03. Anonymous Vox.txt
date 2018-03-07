@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string encoded = Console.ReadLine();
+        string[] values = Console.ReadLine().Split(new char[] { '{', '}', }, StringSplitOptions.RemoveEmptyEntries);
+
+        string pattern = @"([a-zA-Z]+)(\S+)(\1)"; //group2
+
+        if (Regex.IsMatch(encoded, pattern))
+        {
+            int counter = 0;
+
+            foreach (Match match in Regex.Matches(encoded, pattern))
+            {
+                while (counter < values.Length)
+                {
+                    string current = match.Value;
+                    string start = match.Groups[1].Value;
+                    string placeholder = values[counter];
+                    string end = match.Groups[3].Value;
+                    
+                    string replaced = start + placeholder + end;
+                    encoded = encoded.Replace(current, replaced);
+                    counter++;
+                    break;
+                }
+
+            }
+        }
+
+        Console.WriteLine(encoded);
+    }
+}

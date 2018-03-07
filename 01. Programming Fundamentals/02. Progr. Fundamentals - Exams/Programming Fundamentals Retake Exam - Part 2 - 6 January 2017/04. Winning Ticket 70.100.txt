@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string[] input = Console.ReadLine().Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+        string pattern = @".{20}";
+        string winning = @"(\${6,}|\^{6,}|\@{6,}|\#{6,}).*(\1)";
+        string jackpot = @"(\${10}|\^{10}|\@{10}|\#{10}).*(\1)";
+
+        char symbol = 'a';
+        foreach (var ticket in input)
+        {
+            if (Regex.IsMatch(ticket, pattern))
+            {
+                if (Regex.IsMatch(ticket, jackpot))
+                {
+                    symbol = Regex.Match(ticket, jackpot).Groups[1].Value.First();
+                    Console.WriteLine($"ticket \"{ticket}\" - {Regex.Match(ticket,jackpot).Groups[1].Value.Count()}{symbol} Jackpot!");
+                }
+                else if (Regex.IsMatch(ticket, winning))
+                {
+                    symbol = Regex.Match(ticket, winning).Groups[1].Value.First();
+                    Console.WriteLine($"ticket \"{ticket}\" - {Regex.Match(ticket, winning).Groups[1].Value.Count()}{symbol}");
+
+                }
+                else
+                {
+                    Console.WriteLine($"ticket \"{ticket}\" - no match");
+                }
+            }
+            else
+            {
+                Console.WriteLine("invalid ticket");
+            }
+
+        }
+
+    }
+}

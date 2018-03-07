@@ -8,57 +8,41 @@ public class Example
     public static void Main()
     {
         int n = int.Parse(Console.ReadLine());
-        // key - legionName => soldierType - soldier count
-        var legions = new Dictionary<string, Dictionary<string, long>>();
+        var Legions = new Dictionary<string, Dictionary<string,int>>();
+        var activities = new Dictionary<string, int>();
 
-        // key - legionName => activity
-        var activities = new Dictionary<string, long>();
+        var innerDict = new Dictionary<string, int>(); 
 
         for (int i = 0; i < n; i++)
         {
-            string[] input = Console.ReadLine().Split(' ','-','>','=',':');
-            long lastActivity = long.Parse(input[0]);
-            string legionName = input[1];
-            string soldierType = input[2];
-            long soldierCount = long.Parse(input[3]);
+            string[] lines = Console.ReadLine().Split('=',' ','-','>',':');
+            int lastActivity = int.Parse(lines[0]); //dict 2 value
+            string legionName = lines[1];           //dict 1/2 key
+            string soldierType = lines[2];          //inner dict key
+            int soldierCount = int.Parse(lines[3]); //inner dict value
+
+            if (!Legions.ContainsKey(legionName))
+            {
+                innerDict.Add(soldierType, soldierCount); //inner
+                Legions.Add(legionName, innerDict);      //legions
+                activities.Add(legionName, lastActivity);//activities
+            }
+            else
+            {
+                if (innerDict.ContainsKey(soldierType))
+                {
+                    innerDict[soldierType] = soldierCount;
+                    Legions[legionName] = innerDict;
+                }
+                else
+                {
+                    innerDict[soldierType]
+                    Legions[legionName]=()
+                }
+            }
 
 
-
-
-
-            //case 1 ->
-            var sortedA = activities
-            .Where(a => a.Value < givenActivity);
-
-            legions.Where(l => activities
-            .Where(a => a.Value < givenActivity)
-            .ContainsValue(l))
-            .OrderedByDescending(s => s);
-
-            //legions
-            // Beatels -> Soldier - 2000
-            // Red_Ones -> Workers - 20 0000
-            
-            // activities
-            // Beatels -> 1;
-            // rED_oNES - 2;
-
-
-            
-            
-
-            
         }
-
-
-
-
-
-
-
-
-
-
 
 
 

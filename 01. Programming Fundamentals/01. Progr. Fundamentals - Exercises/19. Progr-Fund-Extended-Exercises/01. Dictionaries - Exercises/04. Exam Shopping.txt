@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string[] line = Console.ReadLine().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        Dictionary<string, int> warehouse = new Dictionary<string, int>();
+
+        while (line[0] + " " + line[1] != "shopping time")
+        {
+            string product = line[1];
+            int quantity = int.Parse(line[2]);
+
+            if (!warehouse.ContainsKey(product))
+            {
+                warehouse.Add(product, quantity);
+            }
+            else
+            {
+                warehouse[product] += quantity;
+            }
+            line = Console.ReadLine().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        }
+        line = Console.ReadLine().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+
+
+
+
+        while (line[0] + " " + line[1] != "exam time")
+        {
+            string product = line[1];
+            int quantity = int.Parse(line[2]);
+
+            if (warehouse.ContainsKey(product))
+            {
+                if (warehouse[product] == 0)
+                {
+                    Console.WriteLine($"{product} out of stock");
+                }
+                else if (warehouse[product]<quantity)
+                {
+                    warehouse[product] = 0;
+                }
+                else
+                {
+                warehouse[product] -= quantity;
+                }
+
+            }
+            else if (!warehouse.ContainsKey(product))
+            {
+                Console.WriteLine("{0} doesn't exist", string.Join(" ", product));
+            }
+
+            line = Console.ReadLine().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+        }
+        foreach (var item in warehouse)
+        {
+            if (item.Value != 0)
+            {
+                Console.WriteLine($"{item.Key} -> {item.Value}");
+            }
+        }
+    }
+}

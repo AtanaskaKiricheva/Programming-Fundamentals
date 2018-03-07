@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string[] data = Console.ReadLine().Split(' ');
+        string[] command = Console.ReadLine().Split(' ');
+
+        List<string> merged = new List<string> { };
+        List<string> divided = new List<string> { };
+
+        while (command[0] != "3:1")
+        {
+            if (command[0] == "merge")
+            {
+                int startIndex = int.Parse(command[1]);
+                int endIndex = int.Parse(command[2]);
+
+                if (startIndex < 0 || startIndex>data.Length-1)
+                {
+                    startIndex = 0;
+                }
+                if (endIndex > data.Length-1 || endIndex<0)
+                {
+                    endIndex = command.Length - 1;
+                }
+
+
+               
+
+
+            }
+            else if (command[0] == "divide")
+            {
+                int index = int.Parse(command[1]);
+                int partitions = int.Parse(command[2]);
+
+
+
+
+
+            }
+
+
+
+
+        }
+
+
+
+
+    }
+}

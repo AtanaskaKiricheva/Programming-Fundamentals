@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        int input = int.Parse(Console.ReadLine());
+        var nested = new SortedDictionary<string, SortedDictionary<string, List<string>>>();
+
+        for (int i = 0; i < input; i++)
+        {
+            string[] array = Console.ReadLine().Split(" ".ToCharArray());
+            string continent = array[0];
+            string country = array[1];
+            string city = array[2];
+
+            if (!nested.ContainsKey(continent)) // first dict contains continent?-Not.
+            {
+                nested.Add(continent, new SortedDictionary<string, List<string>>());
+                nested[continent].Add(country, new List<string>());
+                nested[continent][country].Add(city);
+            }
+            else  //first dict contains continent? -Yes.
+            {
+                if (!nested[continent].ContainsKey(country)) //nested dict contains country?-Not.
+                {
+                    nested[continent].Add(country, new List<string>());
+                    nested[continent][country].Add(city);
+                }
+                else //nested dict contains country?-Not.
+                {
+                    if (!nested[continent][country].Contains(city)) //list contains city?- Not.
+                    {
+                        nested[continent][country].Add(city);
+                    } //else -skip.
+                }
+            }
+        }
+
+
+        foreach (var continent in nested)
+        {
+            Console.WriteLine(continent.Key+":");
+            foreach (var country in continent.Value)
+            {
+                Console.WriteLine($"{country.Key} -> {string.Join(", ", country.Value.OrderBy(x=>x))}");
+            }
+        }
+
+
+    }
+}

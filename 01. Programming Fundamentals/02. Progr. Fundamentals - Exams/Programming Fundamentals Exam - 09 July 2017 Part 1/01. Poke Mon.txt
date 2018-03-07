@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        long pokePower = long.Parse(Console.ReadLine());
+        long pokeTarget = long.Parse(Console.ReadLine());
+        int exhaustionFactor = int.Parse(Console.ReadLine());
+
+        long result = pokePower;
+        int counter = 0;
+
+        for (long i = pokeTarget; i <= pokePower; i++)
+        {
+            pokePower -= pokeTarget;
+            counter++;
+            if (pokePower == result / 2 && exhaustionFactor!=0)
+            {
+                pokePower /= exhaustionFactor;
+            }
+            i--; ;
+        }
+
+        Console.WriteLine(pokePower);
+        Console.WriteLine(counter);
+    }
+}

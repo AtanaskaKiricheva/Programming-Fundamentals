@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        int loop = int.Parse(Console.ReadLine());
+        var students = new Dictionary<string, List<double>>();
+
+
+        for (int i = 0; i < loop; i++)
+        {
+            string[] student = Console.ReadLine().Split(" ".ToCharArray(),StringSplitOptions.RemoveEmptyEntries);
+            string name = student[0];
+            double grade = double.Parse(student[1]);
+
+            if (!students.ContainsKey(name))
+            {
+                students.Add(name,new List<double> {grade});
+            }
+            else
+            {
+                students[name].Add(grade);
+            }
+        }
+
+        foreach (var student in students)
+        {
+            double average = 0;
+            foreach (var grade in student.Value)
+            {
+                average += grade;
+            }
+            Console.WriteLine($"{student.Key} -> {string.Join(" ",student.Value.Select(x => string.Format("{0:f2}",x)))} (avg: {average/student.Value.Count:f2})");
+        }
+
+    }
+}

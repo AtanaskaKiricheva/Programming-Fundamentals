@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string[] line = Console.ReadLine().Split(" : ".ToCharArray(),StringSplitOptions.RemoveEmptyEntries);
+        Dictionary<string, string> namesAndNumbers = new Dictionary<string, string>();
+        string pattern = @"[a-zA-z]+?";
+
+        while (line[0] != "Over")
+        {
+            if (Regex.IsMatch(line[0], pattern))
+            {
+                namesAndNumbers.Add(line[0], line[1]);
+            }
+            else
+            {
+                namesAndNumbers.Add(line[1], line[0]);
+            }
+            line = Console.ReadLine().Split(" : ".ToCharArray(),StringSplitOptions.RemoveEmptyEntries);
+        }
+        foreach (var n in namesAndNumbers.OrderBy(x=>x.Key))
+        {
+            Console.WriteLine($"{n.Key} -> {n.Value}");
+        }
+
+
+    }
+}

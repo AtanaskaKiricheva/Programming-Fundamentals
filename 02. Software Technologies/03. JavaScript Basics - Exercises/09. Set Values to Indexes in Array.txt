@@ -1,0 +1,19 @@
+function solve(input){
+    let length = Number(input[0]);
+    let array = new Array(length);
+
+    for (let i = 1; i < input.length; i++) {
+        let seq = input[i].split(' - ');
+        let index = Number(seq[0]);
+        let value = Number(seq[1]);
+        array[index]=value;
+    }
+    for (let item of array) {
+        if (item===undefined) {
+            console.log(0);
+        }
+        else {
+            console.log(item);
+        }
+    }
+}

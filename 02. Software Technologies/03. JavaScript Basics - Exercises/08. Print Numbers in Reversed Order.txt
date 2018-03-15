@@ -1,0 +1,6 @@
+function solve(input){
+    let reversed = input.reverse();
+    for (let item of reversed) {
+        console.log(item);
+    }
+}

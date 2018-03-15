@@ -1,0 +1,18 @@
+function solve(input){
+    let arr =[];
+    for (let i = 0; i < input.length; i++) {
+        let seq = input[i].split(' ');
+        let command = seq[0];
+        let argumet = seq[1];
+        if (command === "add") {
+            arr.push(argumet);
+        }
+        else {
+            arr.splice(argumet,1);
+        }
+    }
+    for (let item of arr) {
+    console.log(item);
+
+    }
+}

@@ -1,0 +1,14 @@
+function sum(input) {
+
+    let symmetric = [];
+    for (let i = 1; i <= input ; i++) {
+        if(isSymetric(i.toString())){
+            symmetric.push(i);
+        }
+    }
+    console.log(symmetric.join(' '));
+    function isSymetric(num) {
+        let reversed = num.split('').reverse().join('');
+        return reversed === num;
+    }
+}

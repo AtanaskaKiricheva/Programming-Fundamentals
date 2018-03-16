@@ -1,0 +1,13 @@
+function solve (input){
+
+    let obj ={};
+    let values = input.forEach(p=>{
+        let [key,value] = p.split(' -> ');
+        if (!Number.isNaN(Number(value))) { // works with int and double
+            value=Number(value);
+        }
+        obj[key]=value;
+    });
+    console.log(JSON.stringify(obj));
+
+}

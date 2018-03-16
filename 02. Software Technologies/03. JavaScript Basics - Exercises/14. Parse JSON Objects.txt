@@ -1,0 +1,10 @@
+function solve (input){
+
+    for (let item of input) {
+       let obj = JSON.parse(item);
+        console.log(`Name: ${obj.name}`);
+        console.log(`Age: ${obj.age}`);
+        console.log(`Date: ${obj.date}`);
+    }
+
+}

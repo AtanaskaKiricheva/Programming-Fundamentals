@@ -1,0 +1,12 @@
+function solve (input){
+    for (let item of input) {
+        let seq = item.split(" -> ");
+        let name = seq[0];
+        let age = Number(seq[1]);
+        let grade = seq[2];
+        console.log("Name: "+name);
+        console.log("Age: "+age);
+        console.log("Grade: "+grade);
+    }
+
+}

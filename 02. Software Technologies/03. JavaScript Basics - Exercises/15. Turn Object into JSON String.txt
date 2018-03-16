@@ -1,0 +1,16 @@
+function solve (input){
+
+    let obj ={};
+    for (let item of input) {
+        let seq = item.split(' -> ');
+        let key = seq[0];
+        let value = seq[1];
+        if (Number.isInteger(Number(value))) { // works only with int
+            value=Number(value);
+        }
+        obj[key]=value;
+
+    }
+    console.log(JSON.stringify(obj));
+
+}

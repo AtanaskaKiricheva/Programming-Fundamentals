@@ -1,0 +1,20 @@
+<form>
+    Celsius: <input type="number" name="cel" />
+    <input type="submit" value="Convert">
+    <?php if (isset($_GET['cel'])){
+        $cel = $_GET['cel'];
+        $toFah = $cel*9/5+32;
+
+            echo "$cel&deg;C=$toFah&deg;F";
+        } ?>
+</form>
+<form>
+    Fahrenheit: <input type="number" name="fah" />
+    <input type="submit" value="Convert">
+    <?php
+    if (isset($_GET['fah'])){
+    $fah = $_GET['fah'];
+    $toCel = ($fah-32)*5/9;
+        echo "$fah&deg;F=$toCel&deg;C";
+    } ?>
+</form>

@@ -1,0 +1,21 @@
+<form>
+    N: <input type="text" name="num"/>
+    <input type="submit"/>
+</form>
+<?php
+if (isset($_GET['num'])) {
+    $num1 = intval($_GET['num']);
+    $first = 1;
+    $second = 0;
+    $third = 0;
+    for ($i = 0; $i < $num1; $i++) {
+        $next = $first + $second + $third;
+        $first = $second;
+        $second = $third;
+        $third = $next;
+        echo($next . "\r\n");
+
+    }
+}
+
+?>

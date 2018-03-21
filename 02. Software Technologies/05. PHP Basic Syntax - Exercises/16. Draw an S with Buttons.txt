@@ -1,0 +1,31 @@
+<?php
+for ($i = 1; $i <= 5; $i++) {
+    echo "<button style='background:color(blue)'>1</button>";
+}
+echo "<br>";
+for ($a = 1; $a <= 3; $a++) {
+    for ($j = 1; $j <= 1; $j++) {
+        echo "<button style='background:color(blue)'>1</button>";
+    }
+    for ($k = 2; $k <= 5; $k++) {
+        echo "<button>0</button>";
+    }
+    echo "<br>";
+}
+for ($i = 1; $i <= 5; $i++) {
+    echo "<button style='background:color(blue)'>1</button>";
+}
+echo "<br>";
+for ($a = 1; $a <= 3; $a++) {
+    for ($k = 2; $k <= 5; $k++) {
+        echo "<button>0</button>";
+    }
+    for ($j = 1; $j <= 1; $j++) {
+        echo "<button style='background:color(blue)'>1</button>";
+    }
+    echo "<br>";
+}
+for ($i = 1; $i <= 5; $i++) {
+    echo "<button style='background:color(blue)'>1</button>";
+}
+?>

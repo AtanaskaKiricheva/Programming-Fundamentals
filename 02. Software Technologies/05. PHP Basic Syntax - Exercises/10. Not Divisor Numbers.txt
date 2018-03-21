@@ -6,8 +6,10 @@
     if (isset($_GET['num'])){
         $num1 = intval($_GET['num']);
         $nums = [];
-        for ($i = 1; $i <= $num1; $i++) {
-            array_push($nums, $i);
+        for ($i = $num1; $i >= 1; $i--) {
+            if ($num1%$i!=0){
+            array_push($nums,$i);
+            }
         }
         echo (implode(" ",$nums));
     }

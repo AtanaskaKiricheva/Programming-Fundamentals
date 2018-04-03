@@ -2,7 +2,6 @@
 
 namespace SoftUniBlogBundle\Controller;
 
-use http\Env\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use SoftUniBlogBundle\Entity\User;
@@ -37,7 +36,7 @@ class UserController extends Controller
             return $this->redirectToRoute('security_login');
 
         }
-        return $this->render("user/register.html.twig", ['form'=>$form->createView()],
+        return $this->render("user/register.html.twig",
             array('form'=>$form->createView())
         );
 

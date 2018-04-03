@@ -65,6 +65,7 @@ class Article
      */
     private $author;
 
+
     //endregion
 
     //region Constructor

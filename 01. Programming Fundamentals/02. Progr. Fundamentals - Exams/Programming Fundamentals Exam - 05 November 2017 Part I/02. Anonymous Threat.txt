@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+
+public class Program
+{
+    public static void Main()
+    {
+        List<string> input = Console.ReadLine().Split(' ').ToList();
+        string[] command = Console.ReadLine().Split(' ');
+
+        while (command[0] != "3:1")
+        {
+            if (command[0] == "merge")
+            {
+                int start = int.Parse(command[1]);
+                int end = int.Parse(command[2]);
+
+                if (start < 0 || start>input.Count-1)
+                {
+                    start = 0;
+                }
+                if (end > input.Count-1 || end <0)
+                {
+                    end = input.Count-1;
+                }
+                string concat = "";
+
+                for (int i = start; i <= end; i++)
+                {
+                    concat += input[i];
+                }
+                for (int i = start; i <= end; i++)
+                {
+                    input.RemoveAt(start);
+
+                }
+                input.Insert(start, concat);
+
+            }
+            else if (command[0] == "divide")
+            {
+                int index = int.Parse(command[1]);
+                int partitionsCount = int.Parse(command[2]);
+
+                List<string> partitions = splittedEqualy(input[index],partitionsCount);
+                input.RemoveAt(index);
+                input.InsertRange(index, partitions);
+
+            }
+            command = Console.ReadLine().Split(' ');
+        }
+            Console.WriteLine(string.Join(" ", input));
+    }
+
+    private static List<string> splittedEqualy(string word, int partitionsCount)
+    {
+        List<string> result = new List<string>();
+        int part = word.Length / partitionsCount;
+
+        while (word.Length>=part)
+        {
+            result.Add(word.Substring(0, part));
+            word = word.Substring(part);
+        }
+        if (word!="")
+        {
+            result.Add(word);
+        }
+        if (result.Count == partitionsCount)
+        {
+            return result;
+        }
+        else
+        {
+            string concat = result[result.Count - 2] + result[result.Count - 1];
+            result.RemoveRange(result.Count - 2, 2);
+            result.Add(concat);
+            return result;
+        }
+    }
+}

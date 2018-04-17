@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+
+public class Program
+{
+    public static void Main()
+    {
+        string info = Console.ReadLine();
+
+        Dictionary<string, long> data = new Dictionary<string, long>();
+        Dictionary<string, List<string>> keys = new Dictionary<string, List<string>>();
+        List<string> cache = new List<string>();
+
+        while (info != "thetinggoesskrra")
+        {
+            string[] splitted = info.Split(' ');
+            if (splitted.Length > 1)
+            {
+                string key = splitted[0];
+                long size = long.Parse(splitted[2]);
+                string set = splitted[4];
+
+                if (!data.ContainsKey(set))
+                {
+                    data.Add(set, size);
+                    keys.Add(set, new List<string> { key });
+                }
+                else
+                {
+                    data[set] += size;
+                    keys[set].Add(key);
+                }
+            }
+            else
+            {
+                cache.Add(splitted[0]);
+            }
+
+            info = Console.ReadLine();
+        }
+        string maxSet = "";
+        long maxSize = 0;
+
+        foreach (var item in data)
+        {
+            if (item.Value > maxSize && cache.Contains(item.Key))
+            {
+                maxSize = item.Value;
+                maxSet = item.Key;
+            }
+        }
+        if (maxSize==0)
+        {
+            return;
+        }
+
+        Console.WriteLine($"Data Set: {maxSet}, Total Size: {maxSize}");
+        foreach (var key in keys)
+        {
+            if (maxSet == key.Key)
+            {
+                foreach (var item in key.Value)
+                {
+                    Console.WriteLine($"$.{item}");
+
+                }
+            }
+        }
+    }
+}

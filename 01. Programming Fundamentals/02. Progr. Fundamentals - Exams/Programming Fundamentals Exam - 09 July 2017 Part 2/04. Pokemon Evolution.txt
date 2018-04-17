@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text.RegularExpressions;
+
+public class Program
+{
+    public static void Main()
+    {
+        string input = Console.ReadLine();
+
+        Dictionary<string, List<KeyValuePair<string, int>>> nameTypeAndIndex = new Dictionary<string, List<KeyValuePair<string, int>>>();
+
+
+
+        while (input != "wubbalubbadubdub")
+        {
+            string[] toSplit = input.Split(' ').ToArray();
+            if (toSplit.Length > 1)
+            {
+                string pokemonName = toSplit[0];
+                string evolutionType = toSplit[2];
+                int evolutionIndex = int.Parse(toSplit[4]);
+
+                if (!nameTypeAndIndex.ContainsKey(pokemonName))
+                {
+                    nameTypeAndIndex.Add(pokemonName, new List<KeyValuePair<string, int>>());
+                }
+                nameTypeAndIndex[pokemonName].Add(new KeyValuePair<string, int>(evolutionType, evolutionIndex));
+            }
+            else
+            {
+                string pokemonName = toSplit[0];
+                if (nameTypeAndIndex.ContainsKey(pokemonName))
+                {
+                    Console.WriteLine($"# {pokemonName}");
+                    foreach (var kvp in nameTypeAndIndex[pokemonName])
+                    {
+                        Console.WriteLine(kvp.Key + " <-> " + kvp.Value);
+                    }
+                }
+            }
+            input = Console.ReadLine();
+        }
+
+        foreach (var dict in nameTypeAndIndex)
+        {
+            Console.WriteLine($"# {dict.Key}");
+            foreach (var kvp in dict.Value.OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine(kvp.Key + " <-> " + kvp.Value);
+            }
+        }
+    }
+}

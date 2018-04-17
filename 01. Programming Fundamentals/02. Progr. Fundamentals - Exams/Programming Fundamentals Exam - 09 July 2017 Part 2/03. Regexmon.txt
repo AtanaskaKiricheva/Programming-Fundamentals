@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text.RegularExpressions;
+
+public class Program
+{
+    public static void Main()
+    {
+        string input = Console.ReadLine();
+
+        string didiMatch = @".*?([^a-zA-Z\-]+)";
+        string bojoMatch = @".*?([a-zA-Z]+-[a-zA-Z]+)";
+
+        while (input.Length > 0)
+        {
+            if (Regex.IsMatch(input, didiMatch))
+            {
+                Console.WriteLine(Regex.Match(input, didiMatch).Groups[1].Value);
+                input = input.Remove(0, Regex.Match(input, didiMatch).Value.Length);
+            }
+            else
+            {
+                return;
+            }
+            if (Regex.IsMatch(input, bojoMatch))
+            {
+                Console.WriteLine(Regex.Match(input, bojoMatch).Groups[1].Value);
+                input = input.Remove(0, Regex.Match(input, bojoMatch).Value.Length);
+            }
+            else
+            {
+                return;
+            }
+
+        }
+
+    }
+}

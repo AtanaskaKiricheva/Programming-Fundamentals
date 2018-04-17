@@ -1,0 +1,17 @@
+skeleton/src/main/java/imdb/bindingModel
+
+	@NotNull
+    @Size(min=1)
+    private String name;
+	
+    @NotNull
+    @Size(min=1)
+    private String genre;
+    
+	@NotNull
+    @Size(min=1)
+    private String director;
+
+    private int year;
+	
+	//make getters and setters

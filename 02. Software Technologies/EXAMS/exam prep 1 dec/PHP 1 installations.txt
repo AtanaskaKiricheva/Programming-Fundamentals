@@ -1,0 +1,13 @@
+php skeleton>cmd> or alt+f12 in PHP Storm
+> php composer.phar install
+
+open project with PHP Storm
+make class & controller "Film"
+
+run XAMPP > run Heidi 
+>check if database exists in Heidi 
+PHP Storm>app>resources>film>base> <title>databaseName</title>
+if exists in Heidi > delete
+
+>php bin/console doctrine:database:create
+>php bin/console doctrine:schema:update --force

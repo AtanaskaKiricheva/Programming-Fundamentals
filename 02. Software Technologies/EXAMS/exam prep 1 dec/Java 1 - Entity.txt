@@ -1,0 +1,19 @@
+    //from word document - Data Model
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private  Integer id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String genre;
+
+    @Column(nullable = false)
+    private String director;
+
+    @Column(nullable = false)
+    private int year;
+    
+    //make getters and setters

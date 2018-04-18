@@ -1,0 +1,1 @@
+open skeletons\c#\ProjectRider.sln

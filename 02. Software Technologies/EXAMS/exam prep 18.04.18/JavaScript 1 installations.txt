@@ -1,0 +1,10 @@
+open web storm > open Skeleton\JavaScript
+botton right> Run 'npm install'
+edit configuration .. "+" > Node.js > name: run ; JavaScript file: bin\www
+Run XAMPP
+Run Heidi
+CREATE DATABASE IN HEIDI:
+LocalDB> right click> create new database
+> projectrider_javascript (GET NAME FROM config\config.json>database: copy/paste) 
+> utf8_general_ci
+http://localhost:8000/

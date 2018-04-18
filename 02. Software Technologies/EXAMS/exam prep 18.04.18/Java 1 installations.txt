@@ -1,0 +1,7 @@
+open IJ> Import Project!!
+Import project from external model > Maven > Next > Next > JDK name: 1.8 > Next > Finish
+
+
+when running the server ,check what port it's listening on: 
+2018-04-18 22:43:35.336  INFO 4276 --- [  restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer :
+ Tomcat started on port(s): 8003 (http)

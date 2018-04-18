@@ -1,0 +1,29 @@
+open PHP Storm>open project
+bottom left> show>ok
+shift+shift >terminal> composer install
+edit configuration>"+">PHP Script>
+name: run>file: Skeletons\PHP\bin\console > arguments: server:run > Single instance only [check]
+>src\AppBundle\Entity> delete Project.php
+> shift+shift > terminal >php bin/console doctrine:generate:entity
+name: AppBundle:Project
+enter
+(get from word)
+title
+text
+enter
+enter
+
+description
+text
+enter
+enter
+
+budget
+integer
+enter
+enter
+
+enter
+
+>terminal> php bin/console doctrine:database:create --if-not-exists
+>terminal> php bin/console doctrine:schema:update --force

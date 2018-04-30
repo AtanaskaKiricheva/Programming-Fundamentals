@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text.RegularExpressions;
+
+public class Program
+{
+    public static void Main()
+    {
+        string surface1 = Console.ReadLine();
+        string mantle1 = Console.ReadLine();
+        string core = Console.ReadLine();
+        string mantle2 = Console.ReadLine();
+        string surface2 = Console.ReadLine();
+
+
+        string surfaceRegex = @"[^0-9a-zA-Z]+";
+        string mantleRegex = @"[_]*[0-9]*";
+        string coreRegex = @"[^0-9a-zA-Z]+[_]*[0-9]*([a-zA-Z]+)[_]*[0-9]*[^0-9a-zA-Z]+";
+
+        bool hasSurface = false;
+        bool hasMantle = false;
+        bool hasCore = false;
+        int coreLength = 0;
+
+        if (Regex.IsMatch(surface1, surfaceRegex) && Regex.IsMatch(surface2, surfaceRegex))
+        {
+            hasSurface = true;
+        }
+        if (Regex.IsMatch(mantle1, mantleRegex) && Regex.IsMatch(mantle2, mantleRegex))
+        {
+
+            hasMantle = true;
+        }
+        if (Regex.IsMatch(core, coreRegex))
+        {
+            hasCore = true;
+            coreLength = Regex.Match(core, coreRegex).Groups[1].Length;
+        }
+
+        if (hasSurface && hasMantle && hasCore)
+        {
+            Console.WriteLine("Valid");
+            Console.WriteLine(coreLength);
+        }
+        else
+        {
+            Console.WriteLine("Invalid");
+        }
+
+
+    }
+}

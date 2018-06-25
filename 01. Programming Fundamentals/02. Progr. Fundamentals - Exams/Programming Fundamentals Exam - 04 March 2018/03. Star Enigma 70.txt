@@ -1,0 +1,117 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text.RegularExpressions;
+
+public class Program
+{
+    public static void Main()
+    {
+        int n = int.Parse(Console.ReadLine());
+
+        List<string> planetsAttacked = new List<string> { };
+        int attackedCount = 0;
+        List<string> planetsDestroyed = new List<string> { };
+        int destroyedCount = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            string copy = Console.ReadLine();
+            string message = copy.ToLower();
+            string code = "";
+            int count = 0;
+
+            for (int j = 0; j < message.Length; j++)
+            {
+                if (message[j] == 's' || message[j] == 't' || message[j] == 'a' || message[j] == 'r')
+                {
+                    count++;
+                }
+            }
+            for (int j = 0; j < message.Length; j++)
+            {
+                char c = (char)(copy[j] - count);
+                code += c.ToString();
+            }
+
+            string name = @"@([A-Za-z]+)";
+            var planetName = "";
+            if (Regex.IsMatch(code, name))
+            {
+                planetName = Regex.Match(code, name).Groups[1].Value;
+            }
+            else
+            {
+                continue;
+            }
+            string population = @":([0-9]+)";
+            var planetPopulation = "";
+            if (Regex.IsMatch(code, population))
+            {
+                planetPopulation = Regex.Match(code, population).Groups[1].Value;
+            }
+            else
+            {
+                continue;
+            }
+            string attack = @"!([A-Z])!";
+            var attackType = "";
+            if (Regex.IsMatch(code, attack))
+            {
+                attackType = Regex.Match(code, attack).Groups[1].Value; //if A .. if B...
+            }
+            else
+            {
+                continue;
+            }
+            string soldier = @"->([0-9]+)";
+            var soldierCount = "";
+            if (Regex.IsMatch(code, soldier))
+            {
+                soldierCount = Regex.Match(code, soldier).Groups[1].Value;
+            }
+            else
+            {
+                continue;
+            }
+
+
+            if (attackType == "A")
+            {
+                planetsAttacked.Add(planetName);
+                attackedCount++;
+            }
+            else
+            {
+                planetsDestroyed.Add(planetName);
+                destroyedCount++;
+            }
+        }
+        if (attackedCount > 0)
+        {
+            Console.WriteLine($"Attacked planets: {attackedCount}");
+            foreach (var attacked in planetsAttacked.OrderBy(x => x))
+            {
+                Console.WriteLine($"-> {attacked}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Attacked planets: 0");
+        }
+        if (destroyedCount > 0)
+        {
+            Console.WriteLine($"Destroyed planets: {destroyedCount}");
+            foreach (var destroyed in planetsDestroyed.OrderBy(x => x))
+            {
+                Console.WriteLine($"-> {destroyed}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Destroyed planets: 0");
+        }
+
+    }
+}

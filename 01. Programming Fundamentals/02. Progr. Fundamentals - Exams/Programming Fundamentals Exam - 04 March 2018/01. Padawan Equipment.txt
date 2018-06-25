@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text.RegularExpressions;
+
+public class Program
+{
+    public static void Main()
+    {
+        double money = double.Parse(Console.ReadLine());
+        int students = int.Parse(Console.ReadLine());
+        double lightsabers = double.Parse(Console.ReadLine());
+        double robes = double.Parse(Console.ReadLine());
+        double belts = double.Parse(Console.ReadLine());
+
+
+        double padawans = lightsabers * (Math.Ceiling(students + students * 0.1)) + robes * students + belts * (students - (students / 6));
+
+        if (padawans<=money)
+        {
+            Console.WriteLine($"The money is enough - it would cost {padawans:f2}lv.");
+
+        }
+        else
+        {
+            Console.WriteLine($"Ivan Cho will need {padawans-money:f2}lv more.");
+        }
+
+
+
+    }
+
+}

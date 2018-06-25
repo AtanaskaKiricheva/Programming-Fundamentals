@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string DNA = Console.ReadLine();
+
+
+        var result = new int[DNA.Length];
+        int counter = 1;
+        int bestLength = 0;
+        int bestIndex = 0;
+        int seqIndex = 1;
+
+
+        while (true)
+        {
+            DNA = Console.ReadLine();
+
+            if (DNA == "Clone them!")
+            {
+                break;
+            }
+
+            int[] sequence = DNA.Split('!', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            int currLength = 0;
+            int startIndex = 0;
+
+            for (int i = 0; i < sequence.Length; i++)
+            {
+                if (sequence[i] == 1)
+                {
+                    currLength++;
+
+                    if (currLength > bestLength)
+                    {
+                        result = sequence;
+                        bestIndex = startIndex;
+                        bestLength = currLength;
+                        seqIndex = counter;
+                    }
+                    else if (currLength == bestLength)
+                    {
+                        if (startIndex < bestIndex)
+                        {
+                            result = sequence;
+                            bestIndex = startIndex;
+                            bestLength = currLength;
+                            seqIndex = counter;
+                        }
+                        else if (startIndex == bestIndex && sequence.Sum() > result.Sum())
+                        {
+                            result = sequence;
+                            bestIndex = startIndex;
+                            bestLength = currLength;
+                            seqIndex = counter;
+                        }
+                    }
+                }
+                else
+                {
+                    currLength = 0;
+                    startIndex = i + 1;
+                }
+
+            }
+            counter++;
+        }
+        Console.WriteLine($"Best DNA sample {seqIndex} with sum: {result.Sum()}.");
+        Console.WriteLine(string.Join(" ", result));
+
+    }
+}
